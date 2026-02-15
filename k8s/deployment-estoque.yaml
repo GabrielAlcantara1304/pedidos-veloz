@@ -27,8 +27,8 @@ spec:
           type: RuntimeDefault
       containers:
         - name: estoque
-          image: pedidos-veloz-estoque:latest
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/gabrielalcantara1304/pedidos-veloz/estoque:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8003
           resources:
