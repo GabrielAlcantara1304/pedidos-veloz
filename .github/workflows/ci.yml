@@ -82,7 +82,8 @@ jobs:
           file: ${{ matrix.dockerfile }}
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/pedidos-veloz-${{ matrix.image }}:latest
-            ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/pedidos-veloz-${{ matrix.image }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/${{ github.event.repository.name }}/${{ matrix.image }}:latest
+            ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/${{ github.event.repository.name }}/${{ matrix.image }}:${{ github.sha }}
+            }
           cache-from: type=gha
           cache-to: type=gha
