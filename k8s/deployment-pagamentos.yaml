@@ -27,7 +27,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: pagamentos
-          image: pedidos-veloz-pagamentos:latest
+          image: ghcr.io/gabrielalcantara1304/pedidos-veloz/pagamentos:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8002
