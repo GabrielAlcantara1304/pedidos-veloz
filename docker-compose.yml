@@ -1,0 +1,67 @@
+# Pedidos Veloz - Ambiente local (stubs para CI/CD)
+# Um único comando: docker compose up -d
+
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      PEDIDOS_SERVICE_URL: http://pedidos:8001
+      PAGAMENTOS_SERVICE_URL: http://pagamentos:8002
+      ESTOQUE_SERVICE_URL: http://estoque:8003
+    depends_on:
+      pedidos:
+        condition: service_healthy
+      pagamentos:
+        condition: service_started
+      estoque:
+        condition: service_started
+    networks:
+      - pedidos-net
+    restart: unless-stopped
+
+  pedidos:
+    build:
+      context: .
+      dockerfile: servico-pedidos/Dockerfile
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8001/health')\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - pedidos-net
+    restart: unless-stopped
+
+  pagamentos:
+    build:
+      context: .
+      dockerfile: servico-pagamentos/Dockerfile
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8002/health')\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - pedidos-net
+    restart: unless-stopped
+
+  estoque:
+    build:
+      context: .
+      dockerfile: servico-estoque/Dockerfile
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8003/health')\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - pedidos-net
+    restart: unless-stopped
+
+networks:
+  pedidos-net:
+    driver: bridge
