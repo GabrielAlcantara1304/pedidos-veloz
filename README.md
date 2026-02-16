@@ -95,4 +95,5 @@ Secrets no pipeline: uso de `GITHUB_TOKEN` para o registry.
 
 ## Vídeo Pitch
 
-*(https://www.youtube.com/watch?v=VHQI_QDNR4k*
+*https://www.youtube.com/watch?v=VHQI_QDNR4k*
+
