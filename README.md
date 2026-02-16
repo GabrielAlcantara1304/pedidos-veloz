@@ -95,8 +95,4 @@ Secrets no pipeline: uso de `GITHUB_TOKEN` para o registry.
 
 ## Vídeo Pitch
 
-*(Inserir link do YouTube aqui; pode ser não listado)*
-
-## Licença
-
-Uso educacional / projeto acadêmico.
+*(https://www.youtube.com/watch?v=VHQI_QDNR4k*
